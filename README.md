@@ -1,6 +1,6 @@
 # parrainages-communes-2022
 
-(https://giloop.github.io/parrainages-communes-2022/parrainages-2022.jpg)
+![Carte des parrainages]([https://link](https://giloop.github.io/parrainages-communes-2022/parrainages-2022.jpg))
 
 Une visualisation des parrainages par communes. 
 Réalisation en Python à l'aide de la librairie Folium qui génère une page html statique. 
@@ -11,3 +11,4 @@ Le code réalise principalement l'appariement des données et la génération de
 - Données INSEE de géolocalisation des communes de France, [ici](https://www.data.gouv.fr/fr/datasets/codes-insee-communes-g-olocalis-es/)
 
 
+Auteur : Gilles Gonon
