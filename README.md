@@ -1,6 +1,8 @@
 # parrainages-communes-2022
 
-![Carte des parrainages]([https://link](https://giloop.github.io/parrainages-communes-2022/parrainages-2022.jpg))
+Visualisation à retrouver [ici](https://giloop.github.io/parrainages-communes-2022/)
+
+![Carte des parrainages](https://giloop.github.io/parrainages-communes-2022/parrainages-2022.jpg)
 
 Une visualisation des parrainages par communes. 
 Réalisation en Python à l'aide de la librairie Folium qui génère une page html statique. 
