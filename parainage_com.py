@@ -110,9 +110,14 @@ m.add_child(mcg)
 
 
 # Ajout des groupes
+bSansParrain = False
 groups = {"PÉCRESSE": None,"MACRON":None,"HIDALGO":None,"ROUSSEL":None,"JADOT":None,
 "LASSALLE":None,"ARTHAUD":None,"MÉLENCHON":None, "DUPONT-AIGNAN":None, "LE PEN":None,
-"ZEMMOUR":None, "ASSELINEAU":None,"POUTOU":None,"KAZIB":None,"TAUBIRA":None, 'Autre':None, 'En attente':None}
+"ZEMMOUR":None, "ASSELINEAU":None,"POUTOU":None,"KAZIB":None,"TAUBIRA":None, 'Autre':None}
+
+if bSansParrain:
+    groups['Pas de parrainage'] = None
+
 g_keys = groups.keys()
 
 for k in g_keys:
@@ -120,17 +125,19 @@ for k in g_keys:
     m.add_child(groups[k])
 
 for site in data_sites:
-    if(site["status"]=="Parrains"):
+    if site["status"]=="Parrains":
         mark = folium.Marker(site["coordinates"],popup=site["infos"], tooltip=site["infos"], icon=folium.Icon(color=site["couleur"], icon='ok-sign'))
         l_k = [k for k in g_keys if k in site["candidat"]]
         k = l_k[0] if len(l_k) else 'Autre'
         groups[k].add_child(mark)
-    else:
+    elif bSansParrain:
         mark = folium.Marker(site["coordinates"],popup=site["infos"], tooltip=site["infos"],icon = folium.Icon(color=site["couleur"], icon='exclamation-sign'))
-        groups['En attente'].add_child(mark)
+        groups['Pas de parrainage'].add_child(mark)
 
 folium.LayerControl().add_to(m)
 
 
 #%% Sauvegarde de la carte
 m.save("index.html")
+
+# %%
