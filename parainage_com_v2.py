@@ -226,7 +226,7 @@ for idx, row in df_parains.iterrows():
 
     elif 'outre-mer' in row['Mandat']:
         # Recherche région & coordonnées du chef-lieu 'nom_région', 'chef-lieu_région'
-        df_d = df_regions[np.logical_and(df_regions['REG']==row['COM'], df_regions['REG']==row['DEP'])]
+        df_d = df_regions[np.logical_or(df_regions['REG']==row['COM'], df_regions['REG']==row['DEP'])]
         if len(df_d):
             # Recherche de la préfecture
             df_v = df_d[prep_string_df(df_d['chef-lieu_région'])==df_d['COM']]
