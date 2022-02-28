@@ -1,17 +1,16 @@
 # parrainages-communes-2022
+Une visualisation des parrainages par commune : au 28/02/2022, 10254 parrains cortagraphiés sur 10265.
 
-Au 28/02/2022 : 10254 parrains cortagraphiés sur 10265.
-
-Visualisation à retrouver [ici](https://giloop.github.io/parrainages-communes-2022/)
+Cartographie à retrouver [en ligne ici](https://giloop.github.io/parrainages-communes-2022/)
 
 ![Carte des parrainages](https://giloop.github.io/parrainages-communes-2022/parrainages-2022.jpg)
 
-Une visualisation des parrainages par communes. 
 Réalisation en Python : 
+
 - script v1: `parrainage_com.py`  utilise la librairie Folium qui génère une page html statique. (index_old.html) 
 - script v2: `parrainage_com_v2.py` réalise une localisation plus poussée des parrains et génère désormais un fichier json chargé dynamliquement depuis index.html.
 
-Le code réalise principalement l'appariement des données et la génération de la carte avec les marqueurs des parrainages des différents candidats.
+Le code réalise principalement l'appariement des données et la génération de la carte avec les marqueurs géolocalisés des parrainages des différents candidats.
 
 ## Données utilisées
 
