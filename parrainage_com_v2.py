@@ -274,7 +274,14 @@ for idx, row in df_parains.iterrows():
 print(f"{len(data_sites)} parrains trouvés sur {len(df_parains)}")
 print(f" # KO : communes {n_com_ko}, arrondissement {n_arrond_ko}, région {n_reg_ko}, département {n_dep_ko}, députés {n_deput_ko}, autres {n_autre_ko}")
 
-#%% Création de la carte
+
+#%% Sauvegarde en JSON 
+with open('carto_parrains.json', 'w') as fp:
+    json.dump(data_sites, fp)
+
+# Fichier utilisé dynamiquement par index.html
+
+#%% Création de la carte : inutile avec index.html
 m = folium.Map(location=[46.7687714,4.5660859], 
     zoom_start=6.21, 
     max_zoom=18, min_zoom=1,
@@ -314,6 +321,6 @@ folium.LayerControl().add_to(m)
 
 
 #%% Sauvegarde de la carte
-m.save("index.html")
+m.save("index_old.html")
 
 # %%
