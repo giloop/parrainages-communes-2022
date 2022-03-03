@@ -206,9 +206,26 @@ for idx, row in df_parains.iterrows():
             df_v = df_d[prep_string_df(df_d['préfecture'])==df_d['COM']]
             coords = [df_v.iloc[0]['latitude']+offset[0], df_v.iloc[0]['longitude']+offset[1]]
             info = f"{row['Departement']}<br/>{row['Mandat']} : {row['Civilite']} {row['Prenom']} {row['Nom']}"
+        elif 'SAINT MARTIN' in row['DEP']:
+            coords = [46.921052,-56.269556]
+            info = f"{row['Departement']}<br/>{row['Mandat']} : {row['Civilite']} {row['Prenom']} {row['Nom']}"
         else:
             print(f"!!! KO 'métropolitain',... : {', '.join(row)}")
             n_deput_ko = n_deput_ko + 1
+            continue
+    
+    elif "collectivité territoriale d'outre-mer" in row['Mandat']:
+        df_d = df_regions[np.logical_or(np.logical_or(df_regions['EU_circo']=='Outre-mer', 
+                            df_regions['COM']==row['DEP']), 
+                            df_regions['REG']==row['DEP'])]
+        if len(df_d):
+            # Recherche de la préfecture
+            df_v = df_d[prep_string_df(df_d['chef-lieu_région'])==df_d['COM']]
+            coords = [df_d.iloc[0]['latitude']+offset[0], df_d.iloc[0]['longitude']+offset[1]]
+            info = f"{row['Circonscription']}/{row['Departement']}<br/>{row['Mandat']} : {row['Civilite']} {row['Prenom']} {row['Nom']}"
+        else:
+            print(f"!!! KO 'collect. outre-mer:' : {', '.join(row)}")
+            n_reg_ko = n_reg_ko + 1
             continue
 
     elif 'régional' in row['Mandat']:
@@ -233,7 +250,8 @@ for idx, row in df_parains.iterrows():
             coords = [df_v.iloc[0]['latitude']+offset[0], df_v.iloc[0]['longitude']+offset[1]]
             info = f"{row['Circonscription']}/{row['Departement']}<br/>{row['Mandat']} : {row['Civilite']} {row['Prenom']} {row['Nom']}"
         else:
-            print(f"!!! KO 'régional/outre-mer',... : {', '.join(row)}")
+            # Recherche sur la ville 
+            print(f"!!! KO 'outre-mer',... : {', '.join(row)}")
             n_reg_ko = n_reg_ko + 1
             continue
 
@@ -241,6 +259,16 @@ for idx, row in df_parains.iterrows():
     elif 'Parlement européen' in row['Mandat']:
         # Parlement européen, Luxembourg
         coords = [49.6224195501072+offset[0], 6.146081355070288+offset[1]] 
+        info = f"{row['Circonscription']}/{row['Departement']}<br/>{row['Mandat']} : {row['Civilite']} {row['Prenom']} {row['Nom']}"
+
+    elif 'Assemblée de Corse' in row['Mandat']:
+        # Haute-Corse ou Corse du Sud : centre de la corse
+        coords = [42.150814, 9.070821] 
+        info = f"{row['Circonscription']}/{row['Departement']}<br/>{row['Mandat']} : {row['Civilite']} {row['Prenom']} {row['Nom']}"
+
+    elif 'Polynésie française' in row['Mandat']:
+        # Président de la polynésie française
+        coords = [-17.558974, -149.442771] 
         info = f"{row['Circonscription']}/{row['Departement']}<br/>{row['Mandat']} : {row['Civilite']} {row['Prenom']} {row['Nom']}"
 
     else:
@@ -253,8 +281,17 @@ for idx, row in df_parains.iterrows():
 
     # Vérif coords : si NaN
     if  any(np.isnan(coords)):
-        print(f"!! coords KO (->Paris) : {', '.join(row)}")
-        coords = [48.856729+offset[0],2.291466+offset[1]]
+        if 'MARTINIQUE' in row['DEP']:
+            coords = [14.6345866,-61.2939783]
+        elif 'SAINT PIERRE ET MIQUELON' in row['DEP']:
+            coords = [46.958177,-56.5330887]
+        elif 'WALLIS ET FUTUNA' in row['DEP']:
+            coords = [-14.303476, -178.113544]
+        elif 'POLYNESIE FRANCAISE' in row['DEP']:
+            coords = [-17.558974, -149.442771]
+        else:
+            print(f"!! coords KO (->Paris) : {', '.join(row)}")
+            coords = [48.856729+offset[0],2.291466+offset[1]]
     
         # if 'Paris' in row["Mandat"]:
         #     print(f"!! coords KO (->Paris) : {', '.join(row)}")
@@ -279,48 +316,6 @@ print(f" # KO : communes {n_com_ko}, arrondissement {n_arrond_ko}, région {n_re
 with open('carto_parrains.json', 'w') as fp:
     json.dump(data_sites, fp)
 
-# Fichier utilisé dynamiquement par index.html
+# -> Fichier utilisé dynamiquement par index.html
 
-#%% Création de la carte : inutile avec index.html
-m = folium.Map(location=[46.7687714,4.5660859], 
-    zoom_start=6.21, 
-    max_zoom=18, min_zoom=1,
-    tiles='OpenStreetMap', id = 'my_map')
-
-#%% Constitution des groupes
-mcg = folium.plugins.MarkerCluster(control=False)   # Marker Cluster, hidden in controls
-m.add_child(mcg)
-
-
-# Ajout des groupes
-bSansParrain = False
-groups = {"PÉCRESSE": None,"MACRON":None,"HIDALGO":None,"ROUSSEL":None,"JADOT":None,
-"LASSALLE":None,"ARTHAUD":None,"MÉLENCHON":None, "DUPONT-AIGNAN":None, "LE PEN":None,
-"ZEMMOUR":None, "ASSELINEAU":None,"POUTOU":None,"KAZIB":None,"TAUBIRA":None, 'Autre':None}
-
-if bSansParrain:
-    groups['Pas de parrainage'] = None
-
-g_keys = groups.keys()
-
-for k in g_keys:
-    groups[k] = folium.plugins.FeatureGroupSubGroup(mcg, k)
-    m.add_child(groups[k])
-
-for site in data_sites:
-    if site["status"]=="Parrains":
-        mark = folium.Marker(site["coordinates"],popup=site["infos"], tooltip=site["infos"], icon=folium.Icon(color=site["couleur"], icon='ok-sign'))
-        l_k = [k for k in g_keys if k in site["candidat"]]
-        k = l_k[0] if len(l_k) else 'Autre'
-        groups[k].add_child(mark)
-    elif bSansParrain:
-        mark = folium.Marker(site["coordinates"],popup=site["infos"], tooltip=site["infos"],icon = folium.Icon(color=site["couleur"], icon='exclamation-sign'))
-        groups['Pas de parrainage'].add_child(mark)
-
-folium.LayerControl().add_to(m)
-
-
-#%% Sauvegarde de la carte
-m.save("index_old.html")
-
-# %%
+#%% Empty cell to run all above

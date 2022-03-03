@@ -1,5 +1,5 @@
 # parrainages-communes-2022
-Une visualisation des parrainages par commune : au 28/02/2022, 10254 parrains cortagraphiés sur 10265.
+Une visualisation des parrainages par commune, assemblée, collectivité, ... : au 03/03/2022, 12751 parrains cortagraphiés sur 12751 😅.
 
 Cartographie à retrouver [en ligne ici](https://giloop.github.io/parrainages-communes-2022/)
 
@@ -26,20 +26,8 @@ Pas mal de coordonnées GPS ont été rajoutées à la main par mes soins.
 ## Log de l'appariemment
 
 ```
-!!! KO 'métropolitain',... : Mme, PÉTRUS, Annick, Sénatrice, , Saint-Martin, PÉCRESSE Valérie, 2022-02-08T00:00:00, , SAINT MARTIN
-!!! KO 'régional/outre-mer',... : M., GIBBS, Daniel, Membre d'une assemblée d'une collectivité territoriale d'outre-mer à statut particulier, , Saint-Martin, PÉCRESSE Valérie, 2022-02-15T00:00:00, , SAINT MARTIN
-!!! KO 'régional/outre-mer',... : M., MATIGNON, Francius, Membre d'une assemblée d'une collectivité territoriale d'outre-mer à statut particulier, , Saint-Barthélemy, PÉCRESSE Valérie, 2022-02-17T00:00:00, , SAINT BARTHELEMY
-!!! KO 'régional/outre-mer',... : M., GROS-DESORMEAUX, Hary, Membre d'une assemblée d'une collectivité territoriale d'outre-mer à statut particulier, , Saint-Martin, PÉCRESSE Valérie, 2022-02-17T00:00:00, , SAINT MARTIN
-!!! KO 'régional/outre-mer',... : M., BORDJEL, Patrick, Membre d'une assemblée d'une collectivité territoriale d'outre-mer à statut particulier, , Saint-Barthélemy, ZEMMOUR Éric, 2022-02-17T00:00:00, , SAINT BARTHELEMY
-!!! KO 'régional/outre-mer',... : M., MAGRAS, Bruno, Membre d'une assemblée d'une collectivité territoriale d'outre-mer à statut particulier, , Saint-Barthélemy, ZEMMOUR Éric, 2022-02-17T00:00:00, , SAINT BARTHELEMY
-!!! TODO : M., LUCCHINI, Jean-Jacques, Membre de l'Assemblée de Corse, , Corse-du-Sud, JADOT Yannick, 2022-02-22T00:00:00, , CORSE DU SUD
-!!! TODO : Mme, NIVAGGIONI, Nadine, Membre de l'Assemblée de Corse, , Corse-du-Sud, JADOT Yannick, 2022-02-22T00:00:00, , CORSE DU SUD
-!!! TODO : Mme, PEDINIELLI, Chantal, Membre de l'Assemblée de Corse, , Corse-du-Sud, PÉCRESSE Valérie, 2022-02-22T00:00:00, , CORSE DU SUD
-!!! TODO : M., BICCHIERAY, Didier, Membre de l'Assemblée de Corse, , Haute-Corse, PÉCRESSE Valérie, 2022-02-22T00:00:00, , HAUTE CORSE
-!!! KO 'métropolitain',... : Mme, GUION-FIRMIN, Claire, Députée, 1ère circonscription, Saint-Martin / Saint-Barthélémy, PÉCRESSE Valérie, 2022-02-22T00:00:00, 1ERE CIRCONSCRIPTION, SAINT MARTIN / SAINT BARTHELEMY
-!! coords KO (->Paris) : Mme, FELEU, Yannick, Membre d'une assemblée d'une collectivité territoriale d'outre-mer à statut particulier, , Wallis et Futuna, PÉCRESSE Valérie, 2022-02-24T00:00:00, , WALLIS ET FUTUNA
-10254 parrains trouvés sur 10265
- # KO : communes 0, arrondissement 0, région 5, département 0, députés 2, autres 4
+12751 parrains trouvés sur 12751
+ # KO : communes 0, arrondissement 0, région 0, département 0, députés 0, autres 0
 ```
 
 Auteur : Gilles Gonon
