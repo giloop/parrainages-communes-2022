@@ -271,6 +271,16 @@ for idx, row in df_parains.iterrows():
         coords = [-17.558974, -149.442771] 
         info = f"{row['Circonscription']}/{row['Departement']}<br/>{row['Mandat']} : {row['Civilite']} {row['Prenom']} {row['Nom']}"
 
+    elif 'Martinique' in row['Mandat']:
+        # Président de la Martinique
+        coords = [-14.6072,-61.0723] 
+        info = f"{row['Circonscription']}/{row['Departement']}<br/>{row['Mandat']} : {row['Civilite']} {row['Prenom']} {row['Nom']}"
+    
+    elif 'Nouvelle-Calédonie' in row['Mandat']:
+        # Président de la Nouvelle-Calédonie
+        coords = [-22.2745, 166.4463] 
+        info = f"{row['Circonscription']}/{row['Departement']}<br/>{row['Mandat']} : {row['Civilite']} {row['Prenom']} {row['Nom']}"
+
     else:
         n_autre_ko = n_autre_ko + 1
         print(f"!!! TODO : {', '.join(row)}")
